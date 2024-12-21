@@ -104,6 +104,7 @@
 
     <script src="comet.js"></script>
     <script src="script.js"></script>
+     <button id="show">Plot Comets</button>
     
   </body>
   </html>
@@ -123,6 +124,21 @@
       let isPlaying = false;
       let currentDate;
       let speed = 1; // Default speed
+
+      // Initialize a boolean flag to track button click state
+      let isClicked = false;
+
+      // Get reference to the button
+      const button = document.getElementById('show');
+
+      // Add click event listener to the button
+      button.addEventListener('click', function() {
+          // Toggle the boolean flag
+          isClicked = !isClicked;
+            
+          // Log the state (true or false)
+          console.log('Button clicked:', isClicked);
+      });
 
       // Initialize Three.js scene
       function init() {
@@ -456,7 +472,7 @@
           })
           .filter(Boolean);
 
-        plotComets(cometResults); // Plot the updated comet positions
+        if (isClicked) {plotComets(cometResults);} // Plot the updated comet positions
       }
 
       /*function plotPoints(planetData) {
