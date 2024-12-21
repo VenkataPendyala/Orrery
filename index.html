@@ -81,7 +81,7 @@
     </style>
   </head>
   <body>
-    <h1>Solar System Orrery</h1>
+    <h1>Orrery</h1>
     <div id="controls">
       <label for="dateInput">Choose a date:</label>
       <input type="date" id="dateInput" />
@@ -532,11 +532,6 @@
 
         // Plot each planet and its orbit
         planetData.forEach(({ name, coords }) => {
-          // Create and add orbit line only for Mercury, Venus, and Earth
-          if (["Mercury", "Venus", "Earth"].includes(name)) {
-            const orbitLine = createOrbit(name);
-            scene.add(orbitLine);
-          }
 
           // Create planet mesh with color
           const geometry = new THREE.SphereGeometry(0.05, 32, 32);
