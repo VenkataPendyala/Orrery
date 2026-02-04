@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Julian Date Calculator with 3D Plotting</title>
+    <title>PCNEO Orrery</title>
     <style>
       * {
         box-sizing: border-box;
@@ -81,12 +81,11 @@
     </style>
   </head>
   <body>
-    <h1>Orrery</h1>
+    <h1>Solar System Orrery</h1>
     <div id="controls">
       <label for="dateInput">Choose a date:</label>
       <input type="date" id="dateInput" />
       <button id="calculateButton">Calculate and Plot</button>
-     <button id="show">Plot Comets</button>
       <p id="result"></p>
 
       <div>
@@ -124,21 +123,6 @@
       let isPlaying = false;
       let currentDate;
       let speed = 1; // Default speed
-
-      // Initialize a boolean flag to track button click state
-      let isClicked = false;
-
-      // Get reference to the button
-      const button = document.getElementById('show');
-
-      // Add click event listener to the button
-      button.addEventListener('click', function() {
-          // Toggle the boolean flag
-          isClicked = !isClicked;
-            
-          // Log the state (true or false)
-          console.log('Button clicked:', isClicked);
-      });
 
       // Initialize Three.js scene
       function init() {
@@ -472,7 +456,7 @@
           })
           .filter(Boolean);
 
-        if (isClicked) {plotComets(cometResults);} // Plot the updated comet positions
+        plotComets(cometResults); // Plot the updated comet positions
       }
 
       /*function plotPoints(planetData) {
@@ -530,7 +514,7 @@
         const planetColors = {
           Mercury: 0xE5E5E5, // Gray
           Venus: 0x877882, // Yellow
-          Earth: 0xA0522D, // Blue
+          Earth: 0x0000A0, // Blue
           Mars: 0x9C2E35, // Red
           Jupiter: 0xff9900, // Orange
           Saturn: 0xe1c699, // Tan
@@ -548,6 +532,11 @@
 
         // Plot each planet and its orbit
         planetData.forEach(({ name, coords }) => {
+          // Create and add orbit line only for Mercury, Venus, and Earth
+          if (["Mercury", "Venus", "Earth"].includes(name)) {
+            const orbitLine = createOrbit(name);
+            scene.add(orbitLine);
+          }
 
           // Create planet mesh with color
           const geometry = new THREE.SphereGeometry(0.05, 32, 32);
