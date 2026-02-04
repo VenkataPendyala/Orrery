@@ -1,3 +1,4 @@
+
 // Sample comets data as a JSON string
 const cometsJsonString = `[
   {
